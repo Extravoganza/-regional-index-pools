@@ -2,54 +2,104 @@
 
 **Децентрализованный протокол для инвестирования в токенизированные региональные экономические индексы на Solana**
 
-![Solana](https://img.shields.io/badge/Solana-000000?style=for-the-badge&logo=solana)
-![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript)
+![CI](https://github.com/Marakaya/regional-index-pools/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Solana](https://img.shields.io/badge/Solana-Devnet-9945FF?style=for-the-badge&logo=solana)
+![Hackathon](https://img.shields.io/badge/Hackathon-2026-FF0060?style=for-the-badge)
 
 ---
 
 ## 🎯 О проекте
 
-**Regional Index Pools** — это DeFi-протокол, который переносит модель liquidity pools в мир реальных активов (RWA).
+**Regional Index Pools** — DeFi-протокол для токенизации реальных региональных экономик (RWA).
 
-Вместо традиционных крипто-активов, пользователи инвестируют в пулы, привязанные к региональным экономикам:
-
-- 🌏 **Азиатско-Тихоокеанский регион** — коммерческая и жилая недвижимость
-- 🌍 **Европа** — инфраструктурные проекты
-
----
-
-## 💡 Ключевая идея
-
-Мы создаём новый класс активов — **токенизированные региональные индексы**, которые объединяют реальные бизнесы и распределяют доход инвесторам через смарт-контракты.
-
----
-
-## ⚙️ Как это работает
-
-### Для инвестора:
-
-1. **Подключи кошелёк** (Phantom, Solflare)
-2. **Пройди верификацию** (KYC mock для MVP)
-3. **Выбери региональный пул**
-4. **Внеси USDC** → получи LP-токены
-5. **Получай доход** автоматически
-
-### Механика:
-
-| Шаг | Действие | Результат |
-|-----|----------|-----------|
-| 1 | Депозит 1000 USDC | Получаешь 1000 LP токенов |
-| 2 | Пулы растут | Доход начисляется автоматически |
-| 3 | Через год | LP токены стоят $1085 (8.5% APY) |
-| 4 | Вывод | Сжигаешь LP → получаешь USDC + доход |
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      INVESTOR                               │
+│  💰 $1000 USDC → LP-токены → 📈 8.5% APY                  │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────────────────────┐
+│                   REGIONAL POOL                             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐       │
+│  │ Real Estate │  │  Treasury   │  │  IP / Tech  │       │
+│  │    40%      │  │    30%      │  │    30%      │       │
+│  └─────────────┘  └─────────────┘  └─────────────┘       │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## 📊 Финансовые метрики
+## 🧱 Архитектура
 
-### Примеры пулов:
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        FRONTEND                             │
+│   Next.js + Tailwind + Solana Wallet Adapter               │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    ANCHOR PROGRAM                           │
+│   Program: RWIPool                                         │
+│   Devnet: RwaPooL111111111111111111111111111111111111      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📜 Смарт-контракт
+
+Program ID: `RwaPooL111111111111111111111111111111111111`
+
+### Account структуры:
+
+```
+Pool:       [authority, mint, lp_mint, total_deposits, total_shares, apy, region]
+Investor:   [wallet, pool, shares, total_deposited, kyc_verified, whitelisted]
+```
+
+### Функции:
+
+| Функция | Описание |
+|---------|----------|
+| `initializePool` | Создание регионального пула |
+| `initializeInvestor` | Регистрация инвестора с KYC |
+| `deposit` | Депозит USDC, получение LP токенов |
+| `withdraw` | Вывод: сжигание LP → USDC + доход |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites:
+- Node.js 18+
+- Rust
+- Anchor CLI
+- Solana CLI
+
+```bash
+# Clone
+git clone https://github.com/Marakaya/regional-index-pools
+cd regional-index-pools
+
+# Install dependencies
+npm install
+
+# Build programs
+anchor build
+
+# Run tests
+anchor test
+
+# Start frontend
+cd frontend && npm install && npm run dev
+```
+
+---
+
+## 📊 Примеры пулов (MVP)
 
 | Пул | APY | TVL | Инвесторов | Риск |
 |-----|-----|-----|-----------|------|
@@ -58,46 +108,37 @@
 
 ---
 
-## 🧱 Архитектура
-### Account структуры:
-Pool: [authority, mint, lp_mint, total_deposits, total_shares, apy, region] Investor: [wallet, pool, shares, total_deposited, kyc_verified, whitelisted]
+## 🎨 UI/UX
 
+- 🌙 Dark theme
+- 💜 Violet accents
+- 📊 Real-time графики
+- 🔒 KYC verification
+- 💰 Portfolio dashboard
 
 ---
 
-## 🚀 Запуск
+## 👥 Команда
 
-### Фронтенд:
+| Участник | Роль | Контакт |
+|---------|------|---------|
+| Marakaya | Lead Developer | [Telegram](https://t.me/marakaya) |
 
-```bash
-cd frontend
-npm install
-npm run dev
-Открой: http://localhost:3000
+---
 
-Смарт-контракт:
-Деплой в Solana Playground:
+## 📄 Лицензия
 
-Скопируй programs/rwipool/src/lib.rs
-Вставь в https://beta.solpg.io
-Program ID: RwaPooL111111111111111111111111111111111111
-Build → Deploy
-🎨 UI/UX
-Интерфейс в стиле modern fintech (Stripe / Linear):
+MIT License — see [LICENSE](LICENSE)
 
-🌙 Dark theme
-💜 Violet accents
-📊 Real-time графики
-🔒 KYC verification flow
-💰 Portfolio dashboard
-👥 Команда
-Участник	Роль
-Marakaya	Lead Developer
-📄 Лицензия
-MIT License
+---
 
-🔗 Полезные ссылки
-Solana Docs
-Anchor Framework
-Solana Playground
-Phantom Wallet
+## 🔗 Полезные ссылки
+
+- [Solana Docs](https://docs.solana.com)
+- [Anchor Framework](https://www.anchor-lang.com)
+- [Solana Playground](https://beta.solpg.io)
+- [Phantom Wallet](https://phantom.app)
+
+---
+
+**Hackathon MVP** | Solana | 2026
