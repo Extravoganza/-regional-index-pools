@@ -2,15 +2,16 @@
 node_modules/
 .pnp
 .pnp.js
+.yarn/
 
 # Build
 .next/
 out/
 build/
 dist/
+target/
 
 # Anchor
-target/
 .anchor/
 keys/
 
@@ -20,12 +21,14 @@ keys/
 .env.development.local
 .env.test.local
 .env.production.local
+.env.example
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
+*.suo
 
 # OS
 .DS_Store
@@ -39,8 +42,14 @@ yarn-error.log*
 
 # Testing
 coverage/
+.nyc_output/
 
 # Misc
 .vercel
 *.tsbuildinfo
 next-env.d.ts
+
+# Secrets
+*.pem
+*.key
+secrets/
