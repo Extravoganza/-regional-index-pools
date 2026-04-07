@@ -59,3 +59,45 @@
 ---
 
 ## 🧱 Архитектура
+### Account структуры:
+Pool: [authority, mint, lp_mint, total_deposits, total_shares, apy, region] Investor: [wallet, pool, shares, total_deposited, kyc_verified, whitelisted]
+
+
+---
+
+## 🚀 Запуск
+
+### Фронтенд:
+
+```bash
+cd frontend
+npm install
+npm run dev
+Открой: http://localhost:3000
+
+Смарт-контракт:
+Деплой в Solana Playground:
+
+Скопируй programs/rwipool/src/lib.rs
+Вставь в https://beta.solpg.io
+Program ID: RwaPooL111111111111111111111111111111111111
+Build → Deploy
+🎨 UI/UX
+Интерфейс в стиле modern fintech (Stripe / Linear):
+
+🌙 Dark theme
+💜 Violet accents
+📊 Real-time графики
+🔒 KYC verification flow
+💰 Portfolio dashboard
+👥 Команда
+Участник	Роль
+Marakaya	Lead Developer
+📄 Лицензия
+MIT License
+
+🔗 Полезные ссылки
+Solana Docs
+Anchor Framework
+Solana Playground
+Phantom Wallet
